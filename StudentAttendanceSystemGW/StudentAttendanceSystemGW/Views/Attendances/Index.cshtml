@@ -1,0 +1,133 @@
+﻿
+@model IEnumerable<StudentAttendanceSystemGW.Models.Student>
+
+
+
+@using (Html.BeginForm("Index", "Attendances", FormMethod.Get))
+{
+
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label>Time Table</label>
+                    @Html.DropDownList("TimeTableId", null, htmlAttributes: new { @class = "form-control rounded-0" })
+                </div>
+
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <label>Current Date</label>
+                    <input type="text" id="date" value="@DateTime.Now.ToShortDateString()" class="form-control" readonly/>
+                </div>
+                <div class="col-sm-4 col-md-4 col-lg-4">
+                    <button type="submit" value="Search" class="btn btn-outline-info btn-sm" style="margin-top:25px;">Search</button>
+                </div>
+            </div>
+         
+        </div>
+    </div>
+
+
+    <!-- asdasdasd-->
+  
+    <table class="table table-hover" style="margin-top:1.5rem;">
+        <thead style="background-color: #4ABDAC;">
+            <tr>
+                <th>Student ID</th>
+                <th>Student Name</th>
+                <th>Entry Time</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @if (ViewBag.Students != null)
+            {
+                foreach (var x in ViewBag.Students)
+                {
+                    <tr>
+                        <td><input type="text" name="studentId" value="@x.StudentId" readonly /></td>
+                        <td>@x.StudentName</td>
+                        <td><input type="text" class="form-control" name="entryTime" value="" readonly/></td>
+                        <td><input type="hidden" class="form-control" name="status" value="" /></td>
+                        <td><button class="btn btn-outline-info btnAttend" type="button">Record</button></td>
+                    </tr>
+                }
+            }
+        </tbody>
+
+    </table>
+
+    <button id="submit" class="btn btn-info pull-right">Submit</button>
+
+}
+
+
+<script>
+    $(".btnAttend").click(function (e) {
+        e.preventDefault();
+        //var NowTime = getTime(new Date);
+
+        //var timeTable = new Date($("input[name='StartTime']").val());
+        //alert(timeTable);
+        //var d = Date.parse(timeTable.toString().split(' ').slice(4, 5).join(' '));
+        //alert(d);
+
+        //console.log(timeTable);
+        $(this).closest("tr").find('input[name="entryTime"]').val((new Date()).toLocaleTimeString());
+        $(this).closest("tr").find('input[name="status"]').val();
+        //var d = Date.parse(entryTime);
+        //alert();
+
+
+    });
+
+
+
+    function rowsToJson() {
+        var heads = ["StudentID", "EntryTime", "Status"];
+
+
+        var rows = [];
+        $("tbody tr").each(function () {
+            cur = {
+                TimeTableId: $("#TimeTableId").val(),
+                Date: $("#date").val()
+                //
+
+            };
+            $(this).find("input").each(function (i, v) {
+
+                cur[heads[i]] = $(this).val();
+
+            });
+            rows.push(cur);
+            cur = {};
+            // delete cur["StudentName"]
+        });
+        return rows;
+    }
+
+    $("#submit").click(function (e) {
+        e.preventDefault();
+
+
+        $.each(rowsToJson(), function (index, value) {
+            $.ajax({
+                type: "POST",
+                data: JSON.stringify(rowsToJson()[index]),
+                url: "/Attendances/Index",
+                contentType: "application/json"
+            });
+            //$.post("/Attendances/Index", (rowsToJson()));
+            console.log(rowsToJson()[index]);
+        });
+
+
+
+        console.log(rowsToJson());
+
+
+    });
+
+</script>

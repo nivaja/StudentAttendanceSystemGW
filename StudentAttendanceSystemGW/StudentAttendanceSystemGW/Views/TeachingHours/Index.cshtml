@@ -1,0 +1,43 @@
+﻿@model StudentAttendanceSystemGW.ViewModels.TeachingHoursVM
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@using (Html.BeginForm("Index", "TeachingHours", FormMethod.Get))
+{
+    <div class="container">
+        <div class="row">
+            <div class="col-6">
+                @Html.DropDownList("SemesterID", null, htmlAttributes: new { @class = "form-control rounded-0" })
+                <button type="submit" value="Search" class="btn btn-primary rounded-0">Search</button>
+
+            </div>
+        </div>
+    </div>
+}
+
+<table class="table">
+    <tr>
+        <th>Teacher Name</th>
+        <th>Phone</th>
+        <th>Email</th>
+        <th>Course Name</th>
+        <th>Teaching Hours</th>
+
+    </tr>
+
+
+    @foreach (var x in ViewBag.Report)
+    {
+        <tr>
+            <td>@x.TeacherName</td>
+            <td>@x.Phone</td>
+            <td>@x.Email</td>
+            <td>@x.CourseName</td>
+            <td>@x.TeachingHours</td>
+        </tr>
+    }
+
+</table>

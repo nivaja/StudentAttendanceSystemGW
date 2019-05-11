@@ -1,0 +1,71 @@
+﻿@model IEnumerable<StudentAttendanceSystemGW.Models.Student>
+@{
+    ViewBag.Title = "Student Details ";
+}
+
+<div style=" padding-left:10px;">
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-lg-4" style="padding-top:10px;">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Present Days</h5>
+                        <a href="#" class="card-link text-center">@ViewBag.present</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" style="padding-top:10px;">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Late Days</h5>
+                        <a href="#" class="card-link text-center">@ViewBag.late</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4" style="padding-top:10px;">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Absent Days</h5>
+                        <a href="#" class="card-link text-center">@ViewBag.absent</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <table class="table table-hover" style="margin-top:1.5rem;">
+                <thead style="background-color: #4ABDAC;">
+                    <tr>
+                        <th>Attendance Date</th>
+                        <th>Course Name</th>
+                        <th>Entry Time</th>
+                        <th>Status</th>
+
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (ViewBag.Attendances != null)
+                    {
+                        foreach (var x in ViewBag.Attendances)
+                        {
+                            <tr>
+                                <td><label>@x.Date</label></td>
+                                <td><labe>@x.TimeTable.ModuleClass</labe></td>
+                                <td><label>@x.EntryTime</label> </td>
+                                <td><labe>@x.Status</labe></td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+
+
+</div>

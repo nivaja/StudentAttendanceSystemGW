@@ -1,0 +1,355 @@
+﻿ 
+    @using Microsoft.AspNet.Identity.Owin
+    @using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }</script>
+    @Styles.Render("~/Content/theme_css/bootstrap.css")
+    <link href="~/Content/jquery.timepicker.min.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/theme_css/bar.css")
+    @Styles.Render("~/Content/theme_css/style.css")
+    @Styles.Render("~/Content/theme_css/style4.css")
+
+    <link href="~/Content/fontawesome-free-5.8.1-web/css/all.css" rel="stylesheet" />
+
+
+    @Styles.Render("~/Content/theme_css/pignose.calender.css")
+    @* @Scripts.Render("~/bundles/modernizr")*@
+    <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    @Scripts.Render("~/bundles/jquery")
+</head>
+<body>
+    @*<div class="se-pre-con"></div>*@
+    <div class="wrapper">
+        <!-- Sidebar Holder -->
+        <nav id="sidebar">
+            <div class="sidebar-header">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <h1>
+                            <a href="/Home/Index">Admin</a>
+                        </h1>
+                    }
+                    if (User.IsInRole("User"))
+                    {
+                        <h1>
+                            <a href="/Home/Index">User</a>
+                        </h1>
+                    }
+                    if (User.IsInRole("Teacher"))
+                    {
+                        <h1>
+                            <a href="/Home/Index">Teacher</a>
+                        </h1>
+                    }
+                }
+                <span>A</span>
+            </div>
+
+            <ul class="list-unstyled components">
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        <li class="active">
+                            <a href="/Home/Index">
+                                <i class="fas fa-home"></i>
+                                Dashboard
+                            </a>
+                        </li>
+                    }
+                }
+
+                <li>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false">
+                        <i class="fas fa-th"></i>
+                        Attendance
+                        <i class="fas fa-angle-down fa-pull-right"></i>
+                    </a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="/Attendances/Index">Attendance</a>
+                        </li>
+                        <li>
+                            <a href="/StudentDailyReport">Attendance Daily Report</a>
+                        </li>
+
+                        <li>
+                            <a href="/StudentReport">Student Absent Record</a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    if (User.IsInRole("Admin") || User.IsInRole("User"))
+                    {
+                        <li>
+                            <a href="/Students/Index">
+                                <i class="fas fa-graduation-cap"></i>
+                                Student
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Courses/Index">
+                                <i class="fas fa-book-open"></i>
+                                Course
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Semesters/Index">
+                                <i class="fas fa-swatchbook"></i>
+                                Semester
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Modules/Index">
+                                <i class="fas fa-book"></i>
+                                Module
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Teachers/Index">
+                                <i class="fas fa-user-tie"></i>
+                                Teacher
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/TeacherModules/Index">
+                                <i class="fas fa-chalkboard-teacher"></i>
+
+                                TeacherModule
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/Classes/Index">
+                                <i class="fas fa-users"></i>
+                                Class
+                            </a>
+                        </li>
+
+
+                        <li>
+                            <a href="/TimeTables/Index">
+                                <i class="fas fa-user-clock"></i>
+                                TimeTable
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#Reports" data-toggle="collapse" aria-expanded="false">
+                                <i class="fas fa-bars"></i>
+                                Reports
+                                <i class="fas fa-angle-down fa-pull-right"></i>
+                            </a>
+                            <ul class="collapse list-unstyled" id="Reports">
+                                <li>
+                                    <a href="/EnrollmentReport/Index">Enrolled Student By Modules</a>
+                                </li>
+                                <li>
+                                    <a href="/ExploreModules">Teacher Details By Modules</a>
+                                </li>
+
+
+                            </ul>
+                        </li>
+
+
+
+                    }
+                }
+
+            </ul>
+        </nav>
+
+        <!-- Page Content Holder -->
+        <div id="content">
+            <!-- top-bar -->
+            <nav class="navbar navbar-default mb-xl-5 mb-4">
+                <div class="container-fluid">
+
+                    <div class="navbar-header">
+                        <button type="button" id="sidebarCollapse" class="btn btn-info navbar-btn">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+
+                    <ul class="top-icons-agileits-w3layouts float-right">
+
+                        <li class="nav-item dropdown mx-3">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="fas fa-spinner"></i>
+                            </a>
+                            <div class="dropdown-menu top-grid-scroll drop-2">
+                                <h3 class="sub-title-w3-agileits">Shortcuts</h3>
+                                <a href="/Attendances" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="fas fa-chart-pie mr-3"></i>Link To Attendance
+                                    </h4>
+                                </a>
+                                <a href="/StudentDailyReport" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="fab fa-connectdevelop mr-3"></i>Attendance Daily Report
+                                    </h4>
+                                </a>
+                                <a href="StudentWeeklyReport" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="fas fa-tasks mr-3"></i>Attendace Weekly Report
+                                    </h4>
+                                </a>
+                                <a href="/StudentMonthlyReport" class="dropdown-item mt-3">
+                                    <h4>
+                                        <i class="fab fa-superpowers mr-3"></i>Attendance Monthly Report
+                                    </h4>
+                                </a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button" data-toggle="dropdown" aria-haspopup="true"
+                               aria-expanded="false">
+                                <i class="far fa-user"></i>
+                            </a>
+                            <div class="dropdown-menu drop-3">
+                                <div class="profile d-flex mr-o">
+                                    <div class="profile-l align-self-center">
+                                        <img src="https://www.winhelponline.com/blog/wp-content/uploads/2017/12/user.png" class="img-fluid mb-3" alt="Responsive image">
+                                    </div>
+                                    <div class="profile-r align-self-center">
+                                        @using Microsoft.AspNet.Identity
+                                        @if (Request.IsAuthenticated)
+                                        {
+
+                                            <h3 class="sub-title-w3-agileits">User</h3>
+                                            <a> @{User.Identity.GetUserName();}</a>
+                                        }
+
+
+                                    </div>
+                                </div>
+                              
+
+                                <div class="dropdown-divider"></div>
+                                @using Microsoft.AspNet.Identity
+                                @if (Request.IsAuthenticated)
+                                {
+                                    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                    {
+                                        @Html.AntiForgeryToken()
+                                        @Html.ActionLink("Manage", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                                        <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item mt-3">
+                                            Log off
+
+                                        </a>
+                                    }
+                                    if (User.IsInRole("Admin"))
+                                    {
+                                        @Html.ActionLink("Register User", "Register", "Account", routeValues: null, htmlAttributes: new { title = "Register" })
+                                    }
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <!--// top-bar -->
+            @* MAIN BODY CONTENT *@
+            @RenderBody()
+            @* MAIN BODY CONTENT *@
+
+
+
+
+        </div>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @Scripts.Render("~/Scripts/theme_js/bootstrap.min.js")
+    <!-- Required common Js -->
+    @*@Scripts.Render("~/Scripts/theme_js/jquery-2.2.3.min.js"*@
+    <!-- //Required common Js -->
+    <!-- loading-gif Js -->
+    @Scripts.Render("~/Scripts/theme_js/modernizr.js")
+    <script>
+        //paste this code under head tag or in a seperate js file.
+        // Wait for window load
+        $(window).load(function () {
+            // Animate loader off screen
+            $(".se-pre-con").fadeOut("slow");;
+        });
+    </script>
+    <!--// loading-gif Js -->
+    <!-- Sidebar-nav Js -->
+    <script>
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+            });
+        });
+    </script>
+    <!--// Sidebar-nav Js -->
+    <!-- Graph -->
+    @Scripts.Render("~/Scripts/theme_js/SimpleChart.js")
+
+
+    <!--// Graph -->
+    <!-- Bar-chart -->
+    @Scripts.Render("~/Scripts/theme_js/rumcaJS.js")
+    @Scripts.Render("~/Scripts/theme_js/example.js")
+    <!--// Bar-chart -->
+    <!-- Calender -->
+    @Scripts.Render("~/Scripts/theme_js/moment.min.js")
+    @Scripts.Render("~/Scripts/theme_js/pignose.calender.js")
+   
+    <!--// Calender -->
+    <!-- profile-widget-dropdown js-->
+    @Scripts.Render("~/Scripts/theme_js/script.js")
+    <!--// profile-widget-dropdown js-->
+    <!-- Count-down -->
+    @Scripts.Render("~/Scripts/theme_js/modernizr.js")
+    @*@Scripts.Render("~/Scripts/theme_js/simplyCountdown.js")*@
+    @Styles.Render("~/Content/theme_css/simplyCountdown.css")
+ 
+    <script>
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideDown("fast");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.dropdown-menu', this).stop(true, true).slideUp("fast");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
+    <!-- //dropdown nav -->
+
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>
+

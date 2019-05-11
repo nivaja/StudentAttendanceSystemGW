@@ -1,0 +1,38 @@
+﻿@model IEnumerable<StudentAttendanceSystemGW.Models.TeacherModule>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { controller = "TeacherModules" }, new { @class = "btn btn-info" })
+
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Module Name
+        </th>
+        <th>
+            Teacher Name
+        </th>
+       
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Module.ModuleDescription)
+            
+        </td>
+        <td>
+           @Html.DisplayFor(modelItem => item.Teacher.TeacherName)
+        </td>
+       
+    </tr>
+}
+
+</table>

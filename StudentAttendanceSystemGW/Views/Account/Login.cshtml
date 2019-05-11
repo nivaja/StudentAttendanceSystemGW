@@ -1,0 +1,124 @@
+﻿@using StudentAttendanceSystemGW.Models
+@model LoginViewModel
+@{
+    Layout = null;
+}
+
+
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Modernize an Admin Panel Category Bootstrap Responsive Web Template | Login :: w3layouts</title>
+    <!-- Meta Tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Modernize Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta Tags -->
+    <!-- Style-sheets -->
+    <!-- Bootstrap Css -->
+    @Styles.Render("~/Content/theme_css/bootstrap.css")
+    <!-- Bootstrap Css -->
+    <!-- Common Css -->
+    @Styles.Render("~/Content/theme_css/style.css")
+    @Styles.Render("~/Content/theme_css/fontawesome-all.css")
+
+
+    <!--// Common Css -->
+    <!-- Fontawesome Css -->
+    <!--// Fontawesome Css -->
+    <!--// Style-sheets -->
+    <!--web-fonts-->
+    <link href="//fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!--//web-fonts-->
+</head>
+
+<body>
+    <div class="bg-page py-5">
+        <div class="container">
+            <!-- main-heading -->
+            <h2 class="main-title-w3layouts mb-2 text-center text-white">Login</h2>
+            <!--// main-heading -->
+            <div class="form-body-w3-agile text-center col-md-6 offset-md-3">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+
+                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="d-sm-flex justify-content-between">
+                        <div class="form-check col-md-6 text-sm-left text-center">
+
+
+
+                            @Html.CheckBoxFor(m => m.RememberMe)
+                            @Html.LabelFor(m => m.RememberMe)
+
+                        </div>
+                        <div class="forgot col-md-6 text-sm-right text-center">
+                            <a href="forgot.html">forgot password?</a>
+                        </div>
+                    </div>
+                   
+
+
+                            <input type="submit" value="Log in" class="btn btn-primary error-w3l-btn mt-sm-5 mt-3 px-4" />
+                }
+                <p class="paragraph-agileits-w3layouts mt-4">
+                    Don't have an account
+                <p>
+                    @Html.ActionLink("Register as a new user", "Register")
+                </p>
+                </p>
+            </div>
+         
+
+        </div>
+    </div>
+
+
+
+
+    <!-- Required common Js -->
+    <!-- //Required common Js -->
+    <!-- Js for bootstrap working-->
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }
+    @Scripts.Render("~/theme_js/jquery-2.2.3.min.js")
+    @Scripts.Render("~/theme_js/bootstrap.min.js")
+    <!-- //Js for bootstrap working -->
+
+
+</body>
+
+</html>

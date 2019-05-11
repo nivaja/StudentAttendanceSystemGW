@@ -1,0 +1,64 @@
+﻿@model StudentAttendanceSystemGW.ViewModels.ExploreModulesVM
+
+@*@model IEnumerable<AttendanceManagementSystem.Models.Student>*@
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Teacher By Modules</h2>
+@using (Html.BeginForm("Index", "ExploreModules", FormMethod.Get))
+{
+
+
+
+    <!-- h    hhhhhhh-->
+
+    <div class="card" style="margin-top:1.5rem;">
+        <div class="card-body">
+            <div class="row">
+
+                <div class="col-4">
+                    <label>Module</label>
+                    @Html.DropDownList("ModuleId", null, htmlAttributes: new { @class = "form-control rounded-0" })
+
+                </div>
+                <div class="col-4">
+                    <label>Semester</label>
+                    @Html.DropDownList("SemesterId", null, htmlAttributes: new { @class = "form-control rounded-0" })
+
+                </div>
+
+                <div class="col-4">
+                    <button type="submit" value="Search" class="btn btn-outline-info" style="margin-top:25px;">Search</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- asdasdasd-->
+
+
+}
+
+<div class="card" style="margin-top:1.5rem;">
+    <div class="card-body">
+        <table class="table">
+            <tr>
+                <th>Teacher Name</th>
+                <th>Teacher Type</th>
+            </tr>
+
+            @foreach (var x in ViewBag.Explore)
+            {
+                <tr>
+                    <td>@x.TeacherName</td>
+                    <td>@x.TeacherType</td>
+                </tr>
+            }
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,48 @@
+﻿@model IEnumerable<StudentAttendanceSystemGW.Models.Teacher>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create", new { controller = "Teachers" }, new { @class = "btn btn-info" })
+
+</p>
+<br />
+<table class="table">
+    <tr>
+        <th>
+            Teacher ID
+        </th>
+        <th>
+            Teacher Name
+        </th>
+        <th>
+            Contact No
+        </th>
+        <th>
+            Email
+        </th>
+        <th>Teacher Type</th>
+        <th>Teaching Hour</th>
+    </tr>
+
+@foreach (var data in Model) {
+    <tr>
+        <td>@data.TeacherId</td>
+        <td>@data.TeacherName</td>
+        <td>@data.ContactNo</td>
+        <td>@data.Email</td>
+        <td>@data.TeacherType</td>
+        <td>@data.TeachingHours</td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = data.TeacherId }) |
+            @Html.ActionLink("Details", "Details", new { id = data.TeacherId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = data.TeacherId })
+        </td>
+    </tr>
+}
+
+</table>

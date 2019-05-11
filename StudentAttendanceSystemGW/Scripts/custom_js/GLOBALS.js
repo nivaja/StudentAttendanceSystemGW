@@ -1,0 +1,1 @@
+﻿var HOST = "http://localhost:57009"
